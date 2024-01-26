@@ -3,12 +3,14 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 dotenv.config();
+
 //using express
 const app = express();
 //Routs
 const category = require("./routes/categoriesRouts");
 
 // const carts = require('./routes/cartsRouts')
+const productsRouts = require("./routes/productsRouts");
 
 //express middleware
 app.use(express.json());
@@ -27,13 +29,14 @@ mongoose
     console.error("Error connecting to DB:", err);
   });
 
+app.use("/products", productsRouts);
 // if path is not specified
 app.use("*", (req, res, next) => {
-  res.status(404).json({ message: "Not Found" });
+  res.status(404).json({ message: "Not Found path" });
 });
-//global error handling
+// error handling
 app.use((err, res, req, next) => {
-  res.status(500).json({ message: err.message });
+  res.status(500).json({ message: "routs not found" });
 });
 //listening
 app.listen(process.env.PORT, () => {
