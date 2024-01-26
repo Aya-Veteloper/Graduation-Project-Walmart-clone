@@ -22,7 +22,7 @@ exports.getCategory = asyncHandler(async (req, res) => {
 });
 
 exports.createCategory = asyncHandler(async (req, res) => {
-  const name = req.body.name;
+  const { name } = req.body;
   const category = await CategoryModel.create({ name });
   res.status(201).json({ data: category });
 });
