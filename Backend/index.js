@@ -6,7 +6,6 @@ dotenv.config();
 //using express
 const app = express();
 //Routs
-
 const category = require("./routes/categoriesRouts");
 
 // const carts = require('./routes/cartsRouts')
@@ -32,7 +31,7 @@ mongoose
 app.use("*", (req, res, next) => {
   res.status(404).json({ message: "Not Found" });
 });
-//error handling
+//global error handling
 app.use((err, res, req, next) => {
   res.status(500).json({ message: err.message });
 });
